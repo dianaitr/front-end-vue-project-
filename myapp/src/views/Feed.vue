@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md fluid>
     <v-card>
-      <v-app-bar  color="blue">New Subject</v-app-bar>
+      <v-app-bar color="blue">New Subject</v-app-bar>
 
       <form @submit.prevent="saveSubject">
         <v-text-field class="margen" v-model="titulo" label="Subject Title"></v-text-field>
@@ -35,18 +35,21 @@ export default {
   },
   methods: {
     saveSubject() {
-        if(this.titulo == null || this.descripcion == null){
-            alert("Llene los dos campos")
-        }else{
-            db.collection("subjects")
-        .add({
-          titulo: this.titulo,
-          descripcion: this.descripcion,
-          id_autor: this.id_autor,
-          nombre_autor: this.nombre_autor
-        })
-        .catch(error => console.log(error));
-        }
+      if (this.titulo == null || this.descripcion == null) {
+        alert("Fill al the information");
+      } else {
+        db.collection("subjects")
+          .add({
+            titulo: this.titulo,
+            descripcion: this.descripcion,
+            id_autor: this.id_autor,
+            nombre_autor: this.nombre_autor
+          })
+          .catch(error => console.log(error));
+
+        alert("Subject created");
+        
+      }
       
     }
   },
@@ -56,7 +59,7 @@ export default {
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           const data = {
-            id: doc.data().id,
+            id: doc.id,
             titulo: doc.data().titulo,
             descripcion: doc.data().descripcion,
             id_autor: doc.data().id_autor,
@@ -70,7 +73,7 @@ export default {
 </script>
 
 <style>
-.margen{
-    margin: 2%;
+.margen {
+  margin: 2%;
 }
 </style>
