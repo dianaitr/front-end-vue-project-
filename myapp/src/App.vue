@@ -1,28 +1,38 @@
 <template>
   <v-app>
-    <main>
+   <main>
       <div class="app-container">
         <header class="app-header">
-          <v-toolbar>
+          <v-toolbar visible=false>
             <v-toolbar-items>
-              <v-btn to="/feed" text>Feed</v-btn>
-              <v-btn to="/users">Users</v-btn>
-              <v-btn to="/profile" >Profile</v-btn>
+              <v-btn v-if="this.logged == true" to="/feed" text>Feed</v-btn>
+              <v-btn v-if="this.logged == true" to="/users">Users</v-btn>
+              <v-btn v-if="this.logged == true" to="/profile" >Profile</v-btn>
+             
+              <v-btn v-if="this.logged == false" to="/login" >Login</v-btn>
+              <v-btn v-if="this.logged == false" to="/signup" >Sign Up</v-btn>
+     
+              <v-btn v-if="this.logged == true"  >Log out</v-btn>
+
             </v-toolbar-items>
           </v-toolbar>
         </header>
         <router-view></router-view>
-
-        
       </div>
-    </main>
+      
+    </main> 
   </v-app>
 </template>
 
 <script>
 export default {
   name: "App",
-  components: {}
+  components: {},
+  data() {
+    return {
+      logged: false
+    }
+  }
 };
 </script>
 
