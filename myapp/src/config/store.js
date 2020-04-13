@@ -4,25 +4,25 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    /* state: {
-        favorites: [
+     /* state: {
+        subjects: [
         ],
     },
     mutations: {
-      addToFavorites(state,favorite){
-        state.favorites.push(favorite);
+      addToSubjects(state,subject){
+        state.subjects.push(subject);
       },
-      deleteFromFavorites(state,favorite){
-        state.favorites.splice(state.favorites.indexOf(favorite), 1);
+      deleteFromSubjects(state,subject){
+        state.subjects.splice(state.subjects.indexOf(subject), 1);
       }
     },
     actions: {
-      addFavorites({commit}, favorite){
-        commit("addToFavorites", favorite)
+      addSubject({commit}, subject){
+        commit("addToSubjects", subject)
       },
-      deleteFavorite({commit}, favorite){
-        commit("deleteFromFavorites",favorite)
+      deleteSubject({commit}, subject){
+        commit("deleteFromSubjects",subject)
       }
-    } */
+    } */ 
 
 });

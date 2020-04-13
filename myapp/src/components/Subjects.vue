@@ -13,6 +13,7 @@
 
 <script>
 import db from "../config/firebaseInit";
+
 export default {
   props: {
     subject: {
@@ -27,12 +28,12 @@ export default {
           .doc(this.subject.id)
           .delete()
           .then(function() {
-            alert("Subject deleted")
+            alert("Subject deleted, please refresh")
           })
           .catch(function(error) {
             console.error("Error removing document: ", error);
           });
-      }
+      } 
     }
   }
 };

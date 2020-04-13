@@ -1,6 +1,7 @@
 <template>
   <v-container grid-list-md fluid>
-    <v-card>
+    <v-btn type="submit" color="green" class="margen">Create new Subject</v-btn>
+    <!-- <v-card>
       <v-app-bar color="blue">New Subject</v-app-bar>
 
       <form @submit.prevent="saveSubject">
@@ -9,11 +10,13 @@
 
         <v-btn type="submit" color="green" class="margen">CREATE</v-btn>
       </form>
-    </v-card>
+    </v-card> -->
 
     <v-row v-for="sub in subjects" :key="sub.id">
       <app-subject :subject="sub"></app-subject>
     </v-row>
+    
+      
   </v-container>
 </template>
 
@@ -36,7 +39,7 @@ export default {
   methods: {
     saveSubject() {
       if (this.titulo == null || this.descripcion == null) {
-        alert("Fill al the information");
+        alert("Fill all the information");
       } else {
         db.collection("subjects")
           .add({
@@ -47,10 +50,8 @@ export default {
           })
           .catch(error => console.log(error));
 
-        alert("Subject created");
-        
+        alert("Subject created, please refresh");
       }
-      
     }
   },
   created() {
