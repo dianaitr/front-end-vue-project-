@@ -1,26 +1,20 @@
 <template>
   <v-app>
-    <main :class="{'orange-green' : themeSwitched}">
+    <main >
       <div class="app-container">
-        <header class="app-header dark-brown">
+        <header class="app-header ">
           <v-toolbar>
             <v-toolbar-items>
-              <v-btn to = "/" text>Home</v-btn>
-              <v-btn to= "/pets" text>Pets</v-btn>
+              <v-btn to="/home" text>Home</v-btn>
+              <v-btn to="/users" text>Users</v-btn>
+              <v-btn to="/profile" text>Profile</v-btn>
               
             </v-toolbar-items>
-            <v-spacer></v-spacer>
-            <router-link to="/favorites">
-                <v-icon large>loyalty</v-icon>
-            </router-link>
+            
           </v-toolbar>
         </header>
 
-        <router-view></router-view>
-        
-        <footer class="app-footer dark-brown">
-          <p>123 Main Street | Smithfield, RI 90987 | 345-456-5678</p>
-        </footer>
+
       </div>
     </main>
   </v-app>
@@ -29,15 +23,7 @@
 <script>
 export default {
   name: "App",
-  components: {},
-  data() {
-    return {
-      themeSwitched:false,
-    };
-  },
-  methods: {
-    
-  }
+  
 };
 </script>
 
@@ -63,11 +49,11 @@ body {
 }
 
 main {
-  padding: 40px;
+  padding: 3%;
   font-family: "Roboto", "sans-serif";
   background: #fff top center repeat;
   color: #444;
-  background-image: url("https://raw.githubusercontent.com/VueVixens/projects/master/petshop/images/bg.jpg");
+ 
 }
 
 h1,
@@ -82,7 +68,7 @@ img {
 }
 
 .app-container {
-  max-width: 940px;
+  max-width: 80%;
   margin: 0 auto;
   background-color: #fff;
 }
@@ -138,25 +124,25 @@ img {
 
 .orange-green {
   background-image: url("https://raw.githubusercontent.com/VueVixens/projects/master/petshop/images/bg2.jpg");
-  .light-mint {
-    background-color: #86a193;
-  }
+}
+.light-mint {
+  background-color: #86a193;
+}
 
-  .dark-mint {
-    background-color: #689980;
-  }
+.dark-mint {
+  background-color: #689980;
+}
 
-  .light-brown {
-    background-color: #cc6633;
-  }
+.light-brown {
+  background-color: #cc6633;
+}
 
-  .dark-brown {
-    background-color: #771100;
-  }
+.dark-brown {
+  background-color: #771100;
+}
 
-  .bisque {
-    background-color: #ff9900;
-  }
+.bisque {
+  background-color: #ff9900;
 }
 
 .panel {
