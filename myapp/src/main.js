@@ -20,11 +20,12 @@ const routes = [
 
 Vue.config.productionTip = false
 
+Vue.prototype.bus = new Vue()
+
 Vue.use(VueRouter)
 Vue.use(vuetify)
 
 const router = new VueRouter({ routes });
-
 new Vue({
   vuetify,
   router,

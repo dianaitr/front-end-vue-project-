@@ -27,12 +27,11 @@ export default {
         db.collection("subjects")
           .doc(this.subject.id)
           .delete()
-          .then(function() {
-            alert("Subject deleted, please refresh")
-          })
           .catch(function(error) {
             console.error("Error removing document: ", error);
           });
+          alert("Subject deleted");
+          this.bus.$emit('updateSubjects')
       } 
     }
   }

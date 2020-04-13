@@ -1,7 +1,6 @@
 <template>
   <v-container grid-list-md fluid>
-    <v-btn type="submit" color="green" class="margen">Create new Subject</v-btn>
-    <!-- <v-card>
+    <v-card>
       <v-app-bar color="blue">New Subject</v-app-bar>
 
       <form @submit.prevent="saveSubject">
@@ -10,13 +9,11 @@
 
         <v-btn type="submit" color="green" class="margen">CREATE</v-btn>
       </form>
-    </v-card> -->
+    </v-card>
 
     <v-row v-for="sub in subjects" :key="sub.id">
       <app-subject :subject="sub"></app-subject>
     </v-row>
-    
-      
   </v-container>
 </template>
 
@@ -29,6 +26,7 @@ export default {
   },
   data() {
     return {
+      success: false,
       subjects: [],
       titulo: null,
       descripcion: null,
@@ -49,9 +47,29 @@ export default {
             nombre_autor: this.nombre_autor
           })
           .catch(error => console.log(error));
-
-        alert("Subject created, please refresh");
+        this.updateSubjects();
+        alert("Subject added succesfully")
       }
+    },
+    updateSubjects() {
+      this.subjects = [];
+      db.collection("subjects")
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            const data = {
+              id: doc.id,
+              titulo: doc.data().titulo,
+              descripcion: doc.data().descripcion,
+              id_autor: doc.data().id_autor,
+              nombre_autor: doc.data().nombre_autor
+            };
+            this.subjects.push(data);
+            this.titulo = null;
+            this.descripcion = null;
+          });
+        });
+        
     }
   },
   created() {
@@ -69,6 +87,11 @@ export default {
           this.subjects.push(data);
         });
       });
+  },
+  mounted() {
+    this.bus.$on("updateSubjects", () => {
+      this.updateSubjects();
+    });
   }
 };
 </script>
