@@ -1,20 +1,19 @@
 <template>
   <v-app>
-    <main >
+    <main>
       <div class="app-container">
-        <header class="app-header ">
+        <header class="app-header">
           <v-toolbar>
             <v-toolbar-items>
-              <v-btn to="/home" text>Home</v-btn>
-              <v-btn to="/users" text>Users</v-btn>
-              <v-btn to="/profile" text>Profile</v-btn>
-              
+              <v-btn to="/feed" text>Feed</v-btn>
+              <v-btn to="/users">Users</v-btn>
+              <v-btn to="/profile" >Profile</v-btn>
             </v-toolbar-items>
-            
           </v-toolbar>
         </header>
+        <router-view></router-view>
 
-
+        
       </div>
     </main>
   </v-app>
@@ -23,7 +22,7 @@
 <script>
 export default {
   name: "App",
-  
+  components: {}
 };
 </script>
 
@@ -53,7 +52,6 @@ main {
   font-family: "Roboto", "sans-serif";
   background: #fff top center repeat;
   color: #444;
- 
 }
 
 h1,
