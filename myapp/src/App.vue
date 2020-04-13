@@ -5,7 +5,7 @@
         <header class="app-header">
           <v-toolbar visible=false>
             <v-toolbar-items>
-              <v-btn v-if="this.logged == true" to="/feed" text>Feed</v-btn>
+              <v-btn v-if="this.logged == false" to="/feed" text>Feed</v-btn>
               <v-btn v-if="this.logged == true" to="/users">Users</v-btn>
               <v-btn v-if="this.logged == true" to="/profile" >Profile</v-btn>
              
