@@ -1,13 +1,15 @@
 <template>
   <div>
-    <v-card>
+      <h1></h1>
+     <v-card>
       <v-card-title>
         <div>
-          <h3>{{subject.titulo}}</h3>
+          <h2>{{subject.titulo}}</h2>
+          <h3>{{subject.nombre_autor}}</h3>
           <p>{{subject.descripcion}}</p>
         </div>
       </v-card-title>
-    </v-card>
+    </v-card> 
   </div>
 </template>
 
