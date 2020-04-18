@@ -7,7 +7,12 @@
       <hr />
       <p class="style">{{subject.descripcion}}</p>
     </div>
-    <v-btn outlined="true" color="red" @click="deleteSubject">DELETE</v-btn>
+    <v-btn
+      v-if="user_id == subject.id_autor"
+      outlined="true"
+      color="red"
+      @click="deleteSubject"
+    >DELETE</v-btn>
   </div>
 </template>
 
@@ -20,19 +25,34 @@ export default {
       type: Object
     }
   },
+  computed: {
+    user_id() {
+      return this.$store.state.id;
+    },
+    num_subs() {
+      return this.$store.state.numero_subjects;
+    }
+  },
   methods: {
     deleteSubject() {
-      if (confirm("Are you sure you want to delete?")) {
-       
+      if (confirm("Are you sure you want to delete the subject?")) {
         db.collection("subjects")
           .doc(this.subject.id)
           .delete()
           .catch(function(error) {
             console.error("Error removing document: ", error);
           });
-          alert("Subject deleted");
-          this.bus.$emit('updateSubjects')
-      } 
+        alert("Subject deleted");
+
+        this.$store.commit("disminuirLosSubs");
+        db.collection("usuarios")
+          .doc(this.user_id)
+          .update({
+            numero_subjects: this.num_subs
+          });
+
+        this.bus.$emit("updateSubjects");
+      }
     }
   }
 };

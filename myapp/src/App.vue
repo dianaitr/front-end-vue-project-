@@ -1,26 +1,26 @@
 <template>
   <v-app>
-   <main>
+    <main>
       <div class="app-container">
         <header class="app-header">
-          <v-toolbar visible=false>
+          <v-toolbar visible="false">
             <v-toolbar-items>
-              <v-btn v-if="this.logged == false" to="/feed" text>Feed</v-btn>
+              <v-btn v-if="this.logged == true" to="/feed" text>Feed</v-btn>
               <v-btn v-if="this.logged == true" to="/users">Users</v-btn>
-              <v-btn v-if="this.logged == true" to="/profile" >Profile</v-btn>
-             
-              <v-btn v-if="this.logged == false" to="/login" >Login</v-btn>
-              <v-btn v-if="this.logged == false" to="/signup" >Sign Up</v-btn>
-     
-              <v-btn v-if="this.logged == true"  >Log out</v-btn>
+              <v-btn v-if="this.logged == true" to="/profile">Profile</v-btn>
 
+              <v-btn v-if="this.logged == false" to="/login">Login</v-btn>
+              <v-btn v-if="this.logged == false" to="/signup">Sign Up</v-btn>
+
+              <v-spacer></v-spacer>
+
+              <v-btn v-if="this.logged == true" @click="logout" color="red">Log out</v-btn>
             </v-toolbar-items>
           </v-toolbar>
         </header>
         <router-view></router-view>
       </div>
-      
-    </main> 
+    </main>
   </v-app>
 </template>
 
@@ -31,7 +31,37 @@ export default {
   data() {
     return {
       logged: false
+    };
+  },
+  methods: {
+    changeNavBar() {
+      console.log("change bar");
+      if (this.logged == true) {
+        this.logged = false;
+      } else {
+        this.logged = true;
+      }
+    },
+    logout() {
+      if (confirm("Are you sure you want to log out?")) {
+        this.$store.commit("changeTheID", '');
+        this.$store.commit("changeTheNombre", '');
+        this.$store.commit("changeTheApellido", '');
+        this.$store.commit("changeTheEmail", '');
+        this.$store.commit("changeTheContrasena", '');
+        this.$store.commit("changeTheActivo", '');
+        this.logged = false;
+        this.$router.push("/login");
+      }
     }
+  },
+  mounted() {
+    this.bus.$on("changeNavBar", () => {
+      this.changeNavBar();
+    });
+  },
+  created() {
+    this.$router.push("/login");
   }
 };
 </script>

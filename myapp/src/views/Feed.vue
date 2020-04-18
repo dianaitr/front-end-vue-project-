@@ -29,10 +29,19 @@ export default {
       success: false,
       subjects: [],
       titulo: null,
-      descripcion: null,
-      nombre_autor: "Jose Galvis",
-      id_autor: "Puol7XDGsyddcoECkziu"
+      descripcion: null
     };
+  },
+  computed: {
+    user_id() {
+      return this.$store.state.id;
+    },
+    user_name() {
+      return this.$store.state.nombre + " " + this.$store.state.apellido;
+    },
+    num_subs() {
+      return this.$store.state.numero_subjects;
+    }
   },
   methods: {
     saveSubject() {
@@ -43,12 +52,18 @@ export default {
           .add({
             titulo: this.titulo,
             descripcion: this.descripcion,
-            id_autor: this.id_autor,
-            nombre_autor: this.nombre_autor
+            id_autor: this.user_id,
+            nombre_autor: this.user_name
           })
           .catch(error => console.log(error));
         this.updateSubjects();
-        alert("Subject added succesfully")
+        alert("Subject added succesfully");
+        this.$store.commit("aumentarLosSubs");
+        db.collection("usuarios")
+          .doc(this.user_id)
+          .update({
+            numero_subjects: this.num_subs
+          });
       }
     },
     updateSubjects() {
@@ -69,7 +84,6 @@ export default {
             this.descripcion = null;
           });
         });
-        
     }
   },
   created() {
