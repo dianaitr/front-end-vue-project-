@@ -38,18 +38,28 @@ export default {
               doc.data().email == this.email &&
               doc.data().contrasena == this.contrasena
             ) {
-              this.$store.commit('changeTheID', doc.id)
-              this.$store.commit('changeTheNombre', doc.data().nombre)
-              this.$store.commit('changeTheApellido', doc.data().apellido)
-              this.$store.commit('changeTheEmail', doc.data().email)
-              this.$store.commit('changeTheContrasena', doc.data().contrasena)
-              this.$store.commit('changeTheActivo', doc.data().activo)
-              this.$store.commit('changeTheNumSubs', doc.data().numero_subjects)
-              
-              alert("You're logged!");
-              this.respuesta = true;
-              this.bus.$emit("changeNavBar");
-              this.$router.push("/feed");
+              if (doc.data().activo == true) {
+                this.$store.commit("changeTheID", doc.id);
+                this.$store.commit("changeTheNombre", doc.data().nombre);
+                this.$store.commit("changeTheApellido", doc.data().apellido);
+                this.$store.commit("changeTheEmail", doc.data().email);
+                this.$store.commit(
+                  "changeTheContrasena",
+                  doc.data().contrasena
+                );
+                this.$store.commit("changeTheActivo", doc.data().activo);
+                this.$store.commit(
+                  "changeTheNumSubs",
+                  doc.data().numero_subjects
+                );
+
+                alert("You're logged!");
+                this.respuesta = true;
+                this.bus.$emit("changeNavBar");
+                this.$router.push("/feed");
+              }else{
+                alert("Your account is Inactive :(")
+              }
             }
           });
 

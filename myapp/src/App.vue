@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     changeNavBar() {
-      console.log("change bar");
+      
       if (this.logged == true) {
         this.logged = false;
       } else {
@@ -53,11 +53,24 @@ export default {
         this.logged = false;
         this.$router.push("/login");
       }
+    },
+    closeAll(){
+      this.$store.commit("changeTheID", '');
+        this.$store.commit("changeTheNombre", '');
+        this.$store.commit("changeTheApellido", '');
+        this.$store.commit("changeTheEmail", '');
+        this.$store.commit("changeTheContrasena", '');
+        this.$store.commit("changeTheActivo", '');
+        this.logged = false;
+        this.$router.push("/login");
     }
   },
   mounted() {
     this.bus.$on("changeNavBar", () => {
       this.changeNavBar();
+    });
+    this.bus.$on("closeAll", () => {
+      this.closeAll();
     });
   },
   created() {
