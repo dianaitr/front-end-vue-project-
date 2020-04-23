@@ -39,7 +39,7 @@ export default {
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
-            if (doc.data().nombre == this.elnombre) {
+            if (doc.data().nombre.toLowerCase() == this.elnombre.toLowerCase()) {
               const data = {
                 id: doc.id,
                 nombre: doc.data().nombre,

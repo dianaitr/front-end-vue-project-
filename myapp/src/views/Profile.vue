@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md fluid>
     <v-card>
-      <v-app-bar color="blue">New Subject</v-app-bar>
+      <v-app-bar color="blue">Update Profile</v-app-bar>
 
       <form @submit.prevent="editUser">
         <v-text-field class="margen" v-model="nombre" label="Name"></v-text-field>
@@ -27,7 +27,8 @@ export default {
       apellido: "",
       id_subjects: [],
       email: "",
-      numero_subjects: ""
+      numero_subjects: "",
+      
     };
   },
   computed: {
@@ -72,24 +73,16 @@ export default {
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
             if (doc.data().id_autor == this.id) {
-              this.id_subjects.push(doc.id);
-              console.log("ENTRA 1 " + this.id_subjects.length);
+              
+              db.collection("subjects")
+                .doc(doc.id)
+                .update({
+                  nombre_autor: this.nombre + " " + this.apellido
+                });
             }
-            console.log("ENTRA 2 " + this.id_subjects.length);
           });
         });
-      /* console.log("ENTRA 3 "+ this.id_subjects.length);
-      for (var i = 0; i < this.id_subjects.length; i++) {
-        console.log(this.id_subjects[i]);
-      } */
-      /* this.id_subjects.forEach(sub => {
-          
-        db.collection("subjects")
-          .doc(sub)
-          .update({
-            nombre_autor: this.nombre
-          });
-      }); */
+      
     },
     closeAccount() {
       if (confirm("Are you sure you want to close your account?")) {
